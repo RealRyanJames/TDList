@@ -1,12 +1,14 @@
 use dotenvy::dotenv;
 use sqlx::postgres::PgPoolOptions;
 use std::env;
+use std::io::stdin;
 
 use crate::info::Connect;
-mod sql;
 mod connection;
 mod data;
 mod info;
+mod sql;
+mod todos;
 
 #[tokio::main]
 async fn main() -> Result<(), dotenvy::Error> {
@@ -14,6 +16,32 @@ async fn main() -> Result<(), dotenvy::Error> {
         name: String::from(""),
         message: String::from("No Data from Env File Found"),
     };
+
+    let mut todo_1 = String::new();
+    stdin().read_line(&mut todo_1).unwrap();
+
+    let todos = todo_1.split_whitespace().collect::<Vec<_>>();
+
+    println!("{}", format!("{}", "Enter First Todo: ".to_uppercase()));
+    let t1 = todos[0].parse::<String>();
+    println!("{}", format!("{}", "Enter Second Todo: ".to_uppercase()));
+    let t2 = todos[1].parse::<String>();
+    println!("{}", format!("{}", "Enter Third Todo: ".to_uppercase()));
+    let t3 = todos[2].parse::<String>();
+
+    let mut t: Vec<String> = Vec::new();
+    t.push(format!("Todo 1: {:?}", t1));
+    t.push(format!("Todo 2: {:?}", t2));
+    t.push(format!("Todo 3: {:?}", t3));
+
+    let todos = todos::todos(t);
+
+    let mut index = 0;
+
+    for el in todos.iter() {
+        println!("{}", format!("Todo: {} Index: {}", el.to_string(), index));
+        index += 1;
+    }
 
     let connect = info::ConnectionSuccess::Connected();
 

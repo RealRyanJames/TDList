@@ -3,6 +3,7 @@ use sqlx::postgres::PgPoolOptions;
 use std::env;
 
 use crate::info::Connect;
+mod sql;
 mod connection;
 mod data;
 mod info;

@@ -1,12 +1,10 @@
 use crate::trait_functions;
 
-impl trait_functions::UIShownWindow for trait_functions::utils::UIElementsShow<bool, String> {
+impl trait_functions::UIShownWindow for trait_functions::utils::UIElementsShow<String> {
     fn show_ui_screen(&mut self) -> Self {
-        let t: trait_functions::utils::UIElementsShow<bool, String> =
+        let t: trait_functions::utils::UIElementsShow<String> =
             trait_functions::utils::UIElementsShow {
                 created: String::from("-"),
-                is_shown: true,
-                length: 0.0,
                 xpos: self.xpos as f32,
             };
 

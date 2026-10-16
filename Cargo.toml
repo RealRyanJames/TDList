@@ -4,7 +4,11 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+
+dotenv = "0.15"
 tokio = {version = "1.53.3", features = ["full"]}
-sqlx = {version = "0.8.6", features = ["postgres", "runtime-tokio", "runtime-tokio-rustls"]}
-dotenvy = "0.15"
-anyhow = "1.0.104"
+sqlx = { version = "0.8.6", features = [ "runtime-tokio-rustls", "postgres", "runtime-tokio-rustls" ] }
+
+
+[profile.release]
+debug = true
